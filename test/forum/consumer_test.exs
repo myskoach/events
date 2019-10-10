@@ -49,18 +49,18 @@ defmodule Forum.ConsumerTest do
     test "defines a `handle_info` callback that handles the consumed topic" do
       {:ok, pid} = Forum.TestConsumeConsumer.start_link(0)
 
-      assert Forum.TestConsumeConsumer.handle_info({"test-event-one", %{pid: pid, life: 42}}, nil)
+      assert Forum.TestConsumeConsumer.handle_info(%{pid: pid, life: 42}, nil)
         == {:noreply, nil}
 
       assert Forum.TestConsumeConsumer.get_calls(pid) == 42
 
-      assert Forum.TestConsumeConsumer.handle_info({"test-event-one", %{pid: pid, life: 42}}, nil)
+      assert Forum.TestConsumeConsumer.handle_info(%{pid: pid, life: 42}, nil)
         == {:noreply, nil}
 
       assert Forum.TestConsumeConsumer.get_calls(pid) == 84
 
       assert_raise FunctionClauseError,
-        fn -> Forum.TestConsumeConsumer.handle_info({"test-event-two", %{pid: pid, life: 42}}, nil) end
+        fn -> Forum.TestConsumeConsumer.handle_info(%{pid: pid, whut: 42}, nil) end
     end
   end
 end

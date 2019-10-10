@@ -16,15 +16,15 @@ defmodule Forum.Consumer do
     end
   end
 
-  defmacro consume(event, message, do: block) do
+  defmacro consume(event_module, message, do: block) do
     message = Macro.escape(message)
     block = Macro.escape(block)
-    topic = Macro.expand(event, __CALLER__).topic() # TODO topic args
+    topic = Macro.expand(event_module, __CALLER__).topic() # TODO topic args
 
     quote location: :keep, bind_quoted: [topic: topic, message: message, block: block] do
       @topics [topic | @topics]
 
-      def handle_info({unquote(topic), unquote(message)}, state) do
+      def handle_info(unquote(message), state) do
         unquote(block)
         {:noreply, state}
       end
