@@ -19,7 +19,6 @@ defmodule Forum.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      mod: {Forum.Application, []},
       extra_applications: [:logger]
     ]
   end

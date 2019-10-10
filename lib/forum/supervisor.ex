@@ -1,4 +1,4 @@
-defmodule Forum.ConsumerSupervisor do
+defmodule Forum.Supervisor do
   require Logger
 
   use Supervisor
