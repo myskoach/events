@@ -17,7 +17,7 @@ defmodule Forum do
   @spec publish(struct) :: :ok | {:error, term}
   def publish(%{__struct__: event_name} = event) do
     topic = event_name.topic(event)
-    @pub_sub.publish topic, event
+    @pub_sub.publish topic, {topic, event}
   end
 
   @doc """
