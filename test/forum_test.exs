@@ -9,14 +9,14 @@ defmodule ForumTest do
   describe "publish/2" do
     test "publishes the given event in the configured pub-sub" do
       Forum.PubSub.MockPubSub
-      |> expect(:publish, fn "test-event-one", %{life: 42} -> :ok end)
+      |> expect(:publish, fn "test-event-one", {"test-event-one", %{life: 42}} -> :ok end)
 
       assert Forum.publish(Forum.TestEventOne.new(42)) == :ok
     end
 
     test "fails if the publishing fails" do
       Forum.PubSub.MockPubSub
-      |> expect(:publish, fn "test-event-one", %{life: 42} -> {:error, :fail} end)
+      |> expect(:publish, fn "test-event-one", {"test-event-one", %{life: 42}} -> {:error, :fail} end)
 
       assert Forum.publish(Forum.TestEventOne.new(42)) == {:error, :fail}
     end

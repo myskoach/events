@@ -24,7 +24,7 @@ defmodule Forum.Consumer do
     quote location: :keep, bind_quoted: [topic: topic, message: message, block: block] do
       @topics [topic | @topics]
 
-      def handle_info(unquote(message), state) do
+      def handle_info({unquote(topic), unquote(message)}, state) do
         unquote(block)
         {:noreply, state}
       end
@@ -33,6 +33,8 @@ defmodule Forum.Consumer do
 
   defmacro __before_compile__(_env) do
     quote do
+      @topics Enum.uniq(@topics)
+
       def subscribe_topics() do
         Enum.reduce_while(@topics, :ok, fn topic, _ ->
           case Forum.subscribe(topic) do
