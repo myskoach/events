@@ -7,7 +7,7 @@ defmodule Forum do
 
   Forum is a work in progress.
   """
-  alias Forum.{PublishError, SubscribeError}
+  alias Forum.{Publishable, PublishError, SubscribeError}
 
   @pub_sub Application.get_env(:forum, :pub_sub)
 
@@ -15,8 +15,8 @@ defmodule Forum do
   Publishes the given event to the pub_sub system.
   """
   @spec publish(struct) :: :ok | {:error, term}
-  def publish(%{__struct__: event_name} = event) do
-    topic = event_name.topic(event)
+  def publish(event) do
+    topic = Publishable.topic(event)
     @pub_sub.publish topic, {topic, event}
   end
 
