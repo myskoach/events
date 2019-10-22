@@ -14,6 +14,8 @@ defmodule Forum.PubSub.PhoenixPubSub do
   [docs](https://hexdocs.pm/phoenix_pubsub/Phoenix.PubSub.html).
   """
 
+  require Logger
+
   @behaviour Forum.PubSub
 
   @phoenix_pub_sub Application.get_env(:forum, __MODULE__)
@@ -21,12 +23,22 @@ defmodule Forum.PubSub.PhoenixPubSub do
   @impl true
   @spec publish(String.t, Map.t) :: :ok | {:error, term}
   def publish(topic, payload) do
+    Logger.debug(
+      "[PhoenixPubSub] Broadcasting on topic #{inspect topic}",
+      [server: server(), payload: payload]
+    )
+
     Phoenix.PubSub.broadcast(server(), topic, payload)
   end
 
   @impl true
   @spec subscribe(String.t) :: :ok | {:error, term}
   def subscribe(topic) do
+    Logger.debug(
+      "[PhoenixPubSub] Subscribing to topic #{inspect topic}",
+      [server: server()]
+    )
+
     Phoenix.PubSub.subscribe(server(), topic)
   end
 
