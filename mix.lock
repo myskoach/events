@@ -1,5 +1,5 @@
 %{
   "mimic": {:hex, :mimic, "0.3.0", "584dfd5ac2ce3347f56b0de3b7906554e2f6020007efed37e721b968f27ebbc0", [:mix], [], "hexpm"},
   "phoenix_pubsub": {:hex, :phoenix_pubsub, "1.1.2", "496c303bdf1b2e98a9d26e89af5bba3ab487ba3a3735f74bf1f4064d2a845a3e", [:mix], [], "hexpm"},
-  "swiss": {:hex, :swiss, "1.0.0", "408592fe64edc8f74ea89ed9cb933c16aa03235fae1e222ad7551466926f58e0", [:mix], [], "hexpm"},
+  "swiss": {:hex, :swiss, "1.1.0", "2c0dcb879f3c6c322884f9a49041c0de98f10fb3c3bc406e95fdbe8aa0ae4d21", [:mix], [], "hexpm"},
 }
