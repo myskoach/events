@@ -3,19 +3,18 @@ defmodule Forum.Supervisor do
 
   use Supervisor
 
-  @consumers Application.get_env(:forum, :consumers, [])
-
-  def start_link(_) do
-    Supervisor.start_link(__MODULE__, nil, name: __MODULE__)
+  def start_link(consumers) do
+    consumers = consumers || Application.get_env(:forum, :consumers, [])
+    Supervisor.start_link(__MODULE__, consumers, name: __MODULE__)
   end
 
   @impl true
-  def init(_) do
-    if @consumers == [] do
+  def init(consumers) do
+    if consumers == [] do
       Logger.warn("[Forum.ConsumerSupervisor] No consumers detected. Did you forget to config?")
     end
 
-    @consumers
+    consumers
     |> Enum.map(fn consumer -> %{
       id: consumer,
       start: {GenServer, :start_link, [consumer, nil]}
