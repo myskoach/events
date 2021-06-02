@@ -4,7 +4,7 @@ defmodule Forum.MixProject do
   def project do
     [
       app: :forum,
-      version: "0.1.0",
+      version: "0.2.0",
       build_path: "./_build",
       config_path: "./config/config.exs",
       deps_path: "./deps",
@@ -30,8 +30,8 @@ defmodule Forum.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:swiss, "~> 3.0"},
-      {:phoenix_pubsub, "~> 1.1.2", optional: true},
+      {:swiss, "~> 3.4.3"},
+      {:phoenix_pubsub, "~> 2.0.0", optional: true},
       {:mimic, "~> 0.3.0", only: :test}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
