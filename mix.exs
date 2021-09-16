@@ -30,7 +30,7 @@ defmodule Forum.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:swiss, "~> 3.4.3"},
+      {:swiss, "~> 3.5"},
       {:phoenix_pubsub, "~> 2.0.0", optional: true},
       {:mimic, "~> 0.3.0", only: :test}
       # {:dep_from_hexpm, "~> 0.3.0"},
